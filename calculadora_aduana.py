@@ -7,8 +7,8 @@ API_KEY = os.environ.get('API_KEY')
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
-def home():
-    def convert(_from: str, _to: str, qty=1) -> float:
+async def home():
+    async def convert(_from: str, _to: str, qty=1) -> float:
         url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={}&to_currency={}&apikey={}'.format(
             _from, _to, API_KEY)
         response = requests.get(url=url).json()
@@ -20,22 +20,22 @@ def home():
             amount = request.form['amount']
             amount = float(amount)
 
-            result = convert('CLP', 'USD', qty=amount)
+            result = await convert('CLP', 'USD', qty=amount)
 
             if result >= 30:
                 # Tax Calc
                 def _tax(x): return (x + (x)*0.06)*0.19
 
                 return render_template('index.html',
-                                       usd_value=convert('USD', 'CLP'),
+                                       usd_value=await convert('USD', 'CLP'),
                                        _import='{:0.2f}'.format(result),
                                        warning='Debe pagar!',
                                        tax='El impuesto que le corresponde es: $CLP {:0.2f}'.format(
-                                           convert('USD', 'CLP', qty=_tax(result))))
+                                           await convert('USD', 'CLP', qty=_tax(result))))
 
             else:
                 return render_template('index.html',
-                                       usd_value=convert('USD', 'CLP'),
+                                       usd_value=await convert('USD', 'CLP'),
                                        _import='{:0.2f}'.format(result),
                                        warning='Felicidades! No paga impuesto!',
                                        tax='')
@@ -45,7 +45,7 @@ def home():
 
     else:
         return render_template('index.html',
-                               usd_value=convert('USD', 'CLP'),
+                               usd_value=await convert('USD', 'CLP'),
                                _import=0,
                                warning='',
                                tax='')

@@ -7,6 +7,7 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt
+RUN pip install flask[async]
 
 ENV API_KEY=DJLTXSAICDLPTTM1
 ENV FLASK_APP=calculadora_aduana
