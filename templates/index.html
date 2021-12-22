@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Impuesto de Aduanas de Chile</title>
+  </head>
+  <link rel="stylesheet" href="./static/styles/index.css" />
+  <link rel="icon" href="./static/dnji.png" type="image/x-icon" />
+  <body class="body">
+    <div class="container">
+      <div class="left-side col">
+        <h1 class="text">Bienvenido a la Calculadora de Impuesto de Aduanas de Chile
+            (no oficial)
+        </h1>
+        <h3 class="text">
+          Esta calculadora estimará, basándose en el valor en tiempo real del Dólar 
+          ($USD), si su importe precisa de un pago de Impuestos. <br>
+          Cosas a tener en consideración:<br>
+          <ol>
+              <li>La página se encuentra en base beta, por lo que espere que la página
+                  sea <b class="warning">muy inestable</b>
+              </li>
+              <li>
+                  El importe ingresado <b class="warning">debe ser entero</b>.<br>
+                  Ejemplo: Su importe es 99.9; Aproxime a 100.<br>
+                  Sugiero aproximar hacia arriba para tener un estimado más optimista.
+              </li>
+          </ol>
+        </h3>
+        <p class="text">Valor del Dólar: {{usd_value}} pesos.</p>
+        <center>
+          <form action="/" method="POST" class="query-console">
+            <p class="text query">Ingrese importe (CLP$)</p>
+            <input
+              type="number"
+              class="input query"
+              name="amount"
+              min="0"
+              value="{{amount}}"
+              required="required"
+            /><br />
+            <button class="send query" type="submit">Consultar</button>
+          </form>
+        </center>
+      </div>
+      <div class="vl"></div>
+      <div class="right-side col">
+        <h1>Resultados</h1>
+        <p class="text">Su importe: $USD {{_import}}.</p>
+        <center>
+          <h3 class="text warning">{{warning}}</h3>
+        </center>
+        <p class="text">{{tax}}</p>
+        <div class="img-container">
+          <img
+            class="img-ilustration"
+            src="https://www.aduana.cl/aduana/site/artic/20181212/imag/foto_0000001620181212233227/web-4.png"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

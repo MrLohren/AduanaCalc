@@ -1,0 +1,50 @@
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #cccccc;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: #fffff0;
+  position: absolute;
+  display: flex;
+  height: 100%;
+}
+
+.container .vl {
+  border-left: 3px solid #333333;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  border-radius: 25px;
+}
+
+.container > .col {
+  margin-left: 6px;
+  flex: 1 1 auto
+}
+
+.query-console {
+  margin-bottom: 18px;
+  margin-top: 18px;
+}
+
+.query-console > .send{
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.warning {
+  color: red;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.img-ilustration {
+  width: 80%;
+  height: 50%;
+}
